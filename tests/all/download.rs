@@ -86,7 +86,7 @@ fn all_latest_tool_download_urls_valid() {
                 if let Ok(url) = install::prebuilt_url_for(&tool, "0.2.92", &arch, &os) {
                     // Use HTTP HEAD instead of GET to avoid fetching lots of stuff
                     let res = ureq::head(&url).call().unwrap();
-                    let status = res.status();
+                    let status = res.status().as_u16();
                     if 500 > status && status >= 400 {
                         errors.push(format!(
                             "Can't download URL {} for {} on {}: {}",

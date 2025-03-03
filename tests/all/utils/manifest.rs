@@ -6,6 +6,7 @@ use anyhow::Result;
 use serde_json;
 
 #[derive(Deserialize)]
+#[allow(dead_code)]
 pub struct NpmPackage {
     pub name: String,
     #[serde(default = "default_none", rename = "type")]

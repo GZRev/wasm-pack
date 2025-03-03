@@ -15,6 +15,7 @@ use crate::PBAR;
 use anyhow::{anyhow, bail, Error, Result};
 use binary_install::Cache;
 use clap::Args;
+use log::debug;
 use log::info;
 use path_clean::PathClean;
 use std::fmt;
@@ -223,6 +224,9 @@ impl Build {
                     .insert(0, path.to_string_lossy().into_owned());
             }
         }
+
+        debug!("options: {:?}", &build_opts);
+
         let crate_path = get_crate_path(build_opts.path)?;
         let crate_data = manifest::CrateData::new(&crate_path, build_opts.out_name.clone())?;
         let out_dir = crate_path.join(PathBuf::from(build_opts.out_dir)).clean();
