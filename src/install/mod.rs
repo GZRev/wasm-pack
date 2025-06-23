@@ -196,14 +196,14 @@ pub fn prebuilt_url_for(tool: &Tool, version: &str, arch: &Arch, os: &Os) -> Res
         Tool::CargoGenerate => {
             Ok(format!(
                 "https://github.com/cargo-generate/cargo-generate/releases/download/v{0}/cargo-generate-v{0}-{1}.tar.gz",
-                "0.18.2",
+                "0.23.3",
                 target
             ))
         },
         Tool::WasmOpt => {
             Ok(format!(
         "https://github.com/WebAssembly/binaryen/releases/download/{vers}/binaryen-{vers}-{target}.tar.gz",
-        vers = "version_117", // Make sure to update the version in docs/src/cargo-toml-configuration.md as well
+        vers = "version_123", // Make sure to update the version in docs/src/cargo-toml-configuration.md as well
         target = target,
             ))
         }
