@@ -1,12 +1,12 @@
 use std::{fs, panic};
 use wasm_pack::stamps;
 
-fn run_test<T>(test: T) -> ()
+fn run_test<T>(test: T)
 where
-    T: FnOnce() -> () + panic::UnwindSafe,
+    T: FnOnce() + panic::UnwindSafe,
 {
     before();
-    let result = panic::catch_unwind(|| test());
+    let result = panic::catch_unwind(test);
     after();
     assert!(result.is_ok())
 }

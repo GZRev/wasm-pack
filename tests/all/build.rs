@@ -32,9 +32,9 @@ fn it_should_not_make_a_pkg_json_if_passed_no_pack() {
         .success();
 
     let pkg_path = fixture.path.join("pkg");
-    assert_eq!(pkg_path.join("package.json").exists(), false);
-    assert_eq!(pkg_path.join("README.md").exists(), false);
-    assert_eq!(pkg_path.join("licence").exists(), false);
+    assert!(!pkg_path.join("package.json").exists());
+    assert!(!pkg_path.join("README.md").exists());
+    assert!(!pkg_path.join("licence").exists());
 }
 
 #[test]
@@ -93,7 +93,7 @@ fn it_should_build_crates_in_a_workspace() {
         .install_local_wasm_bindgen();
     fixture
         .wasm_pack()
-        .current_dir(&fixture.path.join("blah"))
+        .current_dir(fixture.path.join("blah"))
         .arg("build")
         .assert()
         .success();
@@ -229,7 +229,7 @@ fn build_custom_profile() {
 
 #[test]
 fn build_with_and_without_wasm_bindgen_debug() {
-    for debug in [true, false].iter().cloned() {
+    for debug in [true, false].iter() {
         let fixture = utils::fixture::Fixture::new();
         fixture
             .readme()
@@ -293,7 +293,7 @@ fn build_with_and_without_wasm_bindgen_debug() {
         let contains_move_assertions =
             contents.contains("throw new Error('Attempt to use a moved value')");
         assert_eq!(
-            contains_move_assertions, debug,
+            contains_move_assertions, *debug,
             "Should contain moved value assertions iff debug assertions are enabled. \
              Contains move assertions? {}. \
              Is a debug JS glue build? {}.",
@@ -345,7 +345,7 @@ fn build_from_new() {
     let fixture = utils::fixture::not_a_crate();
     let name = "generated-project";
     fixture.wasm_pack().arg("new").arg(name).assert().success();
-    let project_location = fixture.path.join(&name);
+    let project_location = fixture.path.join(name);
     fixture
         .wasm_pack()
         .arg("build")

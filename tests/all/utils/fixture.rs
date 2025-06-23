@@ -125,7 +125,7 @@ impl Fixture {
     pub fn cargo_toml(&self, name: &str) -> &Self {
         self.file(
             "Cargo.toml",
-            &format!(
+            format!(
                 r#"
                     [package]
                     authors = ["The wasm-pack developers"]
@@ -163,7 +163,7 @@ impl Fixture {
     pub fn cargo_toml_with_custom_profile(&self, name: &str, profile_name: &str) -> &Self {
         self.file(
             "Cargo.toml",
-            &format!(
+            format!(
                 r#"
                     [package]
                     authors = ["The wasm-pack developers"]
@@ -206,7 +206,7 @@ impl Fixture {
     pub fn cargo_toml_with_license_file(&self, name: &str, license_file: &str) -> &Self {
         self.file(
             "Cargo.toml",
-            &format!(
+            format!(
                 r#"
                     [package]
                     authors = ["The wasm-pack developers"]

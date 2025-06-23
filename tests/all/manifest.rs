@@ -10,7 +10,7 @@ use wasm_pack::{self, emoji, license, manifest};
 #[test]
 fn it_gets_the_crate_name_default_path() {
     let path = &PathBuf::from(".");
-    let crate_data = manifest::CrateData::new(&path, None).unwrap();
+    let crate_data = manifest::CrateData::new(path, None).unwrap();
     let name = crate_data.crate_name();
     assert_eq!(name, "wasm_pack");
 }
@@ -25,7 +25,7 @@ fn it_gets_the_crate_name_provided_path() {
 #[test]
 fn it_gets_the_default_name_prefix() {
     let path = &PathBuf::from(".");
-    let crate_data = manifest::CrateData::new(&path, None).unwrap();
+    let crate_data = manifest::CrateData::new(path, None).unwrap();
     let name = crate_data.name_prefix();
     assert_eq!(name, "wasm_pack");
 }
@@ -33,7 +33,7 @@ fn it_gets_the_default_name_prefix() {
 #[test]
 fn it_gets_the_name_prefix_passed_from_cli() {
     let path = &PathBuf::from(".");
-    let crate_data = manifest::CrateData::new(&path, Some("index".to_owned())).unwrap();
+    let crate_data = manifest::CrateData::new(path, Some("index".to_owned())).unwrap();
     let name = crate_data.name_prefix();
     assert_eq!(name, "index");
 }

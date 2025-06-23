@@ -70,7 +70,7 @@ fn can_download_prebuilt_wasm_opt() {
     {
         assert!(dl.binary("bin/wasm-opt").unwrap().is_file());
     } else {
-        assert!(false, "Download Failed");
+        panic!("Download Failed");
     }
 }
 
@@ -87,7 +87,7 @@ fn all_latest_tool_download_urls_valid() {
                     // Use HTTP HEAD instead of GET to avoid fetching lots of stuff
                     let res = ureq::head(&url).call().unwrap();
                     let status = res.status().as_u16();
-                    if 500 > status && status >= 400 {
+                    if (400..500).contains(&status) {
                         errors.push(format!(
                             "Can't download URL {} for {} on {}: {}",
                             url,

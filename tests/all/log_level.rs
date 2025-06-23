@@ -2,11 +2,10 @@ use crate::utils;
 use assert_cmd::prelude::*;
 use predicates::boolean::PredicateBooleanExt;
 use predicates::prelude::predicate::str::contains;
-use predicates::reflection::PredicateReflection;
 use predicates::Predicate;
 use wasm_pack::emoji;
 
-fn matches_info() -> impl Predicate<str> + PredicateReflection {
+fn matches_info() -> impl Predicate<str> {
     contains(format!("[INFO]: {}Checking for the Wasm target...", emoji::TARGET))
         .and(contains(format!("[INFO]: {}Compiling to Wasm...", emoji::CYCLONE)))
         .and(contains("[INFO]: License key is set in Cargo.toml but no LICENSE file(s) were found; Please add the LICENSE file(s) to your project directory"))
@@ -15,7 +14,7 @@ fn matches_info() -> impl Predicate<str> + PredicateReflection {
         .and(contains(format!("[INFO]: {} Your wasm pkg is ready to publish at ", emoji::PACKAGE)))
 }
 
-fn matches_cargo() -> impl Predicate<str> + PredicateReflection {
+fn matches_cargo() -> impl Predicate<str> {
     contains("Finished release [optimized] target(s) in ").or(contains(
         "Finished `release` profile [optimized] target(s) in ",
     ))
