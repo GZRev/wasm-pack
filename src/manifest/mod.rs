@@ -320,7 +320,7 @@ impl CrateData {
             .packages
             .iter()
             .position(|pkg| {
-                pkg.name == manifest.package.name
+                pkg.name.as_str() == manifest.package.name
                     && CrateData::is_same_path(pkg.manifest_path.as_std_path(), &manifest_path)
             })
             .ok_or_else(|| anyhow!("failed to find package in metadata"))?;
@@ -533,7 +533,7 @@ impl CrateData {
         let pkg = &self.data.packages[self.current_idx];
         let npm_name = match scope {
             Some(s) => format!("@{}/{}", s, pkg.name),
-            None => pkg.name.clone(),
+            None => pkg.name.to_string(),
         };
 
         let dts_file = if !disable_dts {

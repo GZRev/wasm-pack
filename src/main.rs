@@ -12,10 +12,7 @@ use anyhow::Result;
 use clap::Parser;
 use std::env;
 use std::panic;
-use wasm_pack::{
-    command::run_wasm_pack,
-    Cli, PBAR,
-};
+use wasm_pack::{command::run_wasm_pack, Cli, PBAR};
 
 mod installer;
 
